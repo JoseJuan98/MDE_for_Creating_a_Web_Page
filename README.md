@@ -57,10 +57,10 @@ And between all task, all time I have to came step behind to change something.
 ### Diagram
 
 
-![Image of Model](https://github.com/JoseJuan98/MDE-for-Creating-a-Web-Page/tree/master/imgs/Diagram_Example.png)
+![Image of Model](/imgs/Diagram_Example.png)
 
 ### Some pages
 
-![Image of ClientView](https://github.com/JoseJuan98/MDE-for-Creating-a-Web-Page/tree/master/imgs/Client.png)
+![Image of ClientView](/imgs/Client.png)
 
-![Image of Form](https://github.com/JoseJuan98/MDE-for-Creating-a-Web-Page/tree/master/imgs/form.png)
+![Image of Form](/imgs/form.png)
