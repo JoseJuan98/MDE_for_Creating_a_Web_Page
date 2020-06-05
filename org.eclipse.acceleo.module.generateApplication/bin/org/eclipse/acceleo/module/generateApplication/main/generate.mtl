@@ -1,0 +1,48 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.unex.dmss.es/WorkFlowMM')]
+[import org::eclipse::acceleo::module::generateApplication::main::generateHTML/]
+
+[template public generateMain(aWorkFlow : WorkFlow)]
+[comment @main/]
+[generateActorView(aWorkFlow)/]
+[generateTaskView(aWorkFlow)/]
+[generateSQL(aWorkFlow)/]
+[/template]
+
+[template public generateTaskView(aWorkFlow : WorkFlow)]
+[for (anActor : Actor | aWorkFlow.actors)]
+	[for(anOp : Operation | anActor.operations)]
+[generateTaskHTML(anOp, anActor)/]
+	[/for]
+[/for]
+[/template]
+[template public generateSQL(aWorkFlow : WorkFlow)]
+[file ('/DataBase/'+aWorkFlow.name+'.sql', false, 'UTF-8')]
+[for (aDataG : DataGroup | aWorkFlow.actors.data)]
+
+CREATE TABLE [aDataG.Name.replace(' ', '_')/] (
+	[aDataG.Name.replace(' ', '_')/]_ID INT AUTO_INCREMENT,
+[for(aData : Data | aDataG.data)]
+	[if(aData.oclIsTypeOf(Number))]
+	[aData.name.replace(' ', '_')/] INT,
+	[elseif(aData.oclIsTypeOf(Text))]
+	[aData.name.replace(' ', '_')/] VARCHAR(100),		
+	[elseif(aData.oclIsTypeOf(File))]
+	[aData.name.replace(' ', '_')/] VARCHAR(100),
+	[elseif(aData.oclIsTypeOf(CheckBox))]
+[for(opt : Option | aData.oclAsType(CheckBox).options)]
+	[opt.fieldname.replace(' ', '_')/] BOOLEAN,
+[/for]
+	[elseif(aData.oclIsTypeOf(Range))]
+	[aData.name.replace(' ', '_')/] INT,
+	[elseif(aData.oclIsTypeOf(Date))]
+	[aData.name.replace(' ', '_')/] DATE,
+	[elseif(aData.oclIsTypeOf(Phone))]
+	[aData.name.replace(' ', '_')/] INT,
+	[/if]
+	[/for] 
+	PRIMARY KEY([aDataG.Name.replace(' ', '_')/]_ID)
+);
+[/for]
+[/file]
+[/template]

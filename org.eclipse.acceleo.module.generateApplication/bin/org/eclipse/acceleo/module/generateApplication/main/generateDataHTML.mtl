@@ -1,0 +1,150 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generateDataHTML.
+ */]
+[module generateDataHTML('http://www.unex.dmss.es/WorkFlowMM')]
+
+
+[**
+ * The documentation of the template generateElement.
+ * @param aFile
+ */]
+[template public nextTask(anOp : Operation, anAct : Actor)]
+
+[for(Op : Operation | anOp.next)]
+[if(Op <> null)]
+	[if(Op.oclIsTypeOf(ReceiveMsg))]
+        <a href="[anAct.Name+'index.html'/]">
+			<img src="../images/homebutton.svg">
+		</a>
+	[elseif(Op.oclIsTypeOf(Final))]
+		<a href="['../EndProcess.html'/]">
+			<img src="../images/next.svg">
+		</a>
+	[elseif(Op.oclIsTypeOf(Join))]
+		[for(jOp : Operation | Op.next)]
+			[if(jOp <> null)]
+[nextTask(Op, anAct)/]
+			[/if]
+		[/for]
+	[else]
+		<a href="['Task'+Op.ID+'.html'/]">
+			<img src="../images/next.svg">
+		</a>
+	[/if]
+[/if]
+[/for]
+[/template]
+
+[template public generateDataGroup(aDataG : DataGroup)]
+[for(aData : Data | aDataG.data)]
+[if(aData.oclIsTypeOf(Number))]
+    <div class="number"> 
+
+        <label for="Number">[aData.name/] :</label>  
+        <input id="Number" name="Number" placeholder="Introduce a number..." type="number" autofocus [if(aData.requiered)]required[/if]>
+    
+	</div>
+[elseif(aData.oclIsTypeOf(Text))]
+    <div class="string">
+ 
+        <label for="string">[aData.name/] :</label>  
+        <input id="string" name="string" placeholder="Introduce the text..." type="text" autofocus [if(aData.requiered)]required[/if]>
+
+	</div>
+[elseif(aData.oclIsTypeOf(File))]
+    <div class="file">
+
+        <label for="file"> Choose a file&hellip;</label>
+        <input type="file" name="file" id="file" data-multiple-caption="{count} files selected" multiple autofocus [if(aData.requiered)]required[/if] accept="[for(ext : Extension | aData.oclAsType(File).extension) separator (',')] [ext.extension/] [/for]"/>
+
+    </div>
+[elseif(aData.oclIsTypeOf(CheckBox))]
+    <div class="list">
+        <p>[ aData.name/] :</p>
+        <ul>
+[for(op : Option | aData.oclAsType(CheckBox).options)]
+           <li>
+                <input name="check" type="checkbox"> 
+                <label for="check">[op.fieldname/]</label> 
+            </li>
+[/for]
+        </ul>
+        
+     </div>
+[elseif(aData.oclIsTypeOf(Image))]
+    <div class="img0">
+       
+         <img id="img1" src="../images/[aData.oclAsType(Image).src/]" alt="[aData.oclAsType(Image).alt/]">
+        
+    </div>
+[elseif(aData.oclIsTypeOf(Range))]
+    <div name="range">
+      
+        <input id="skill" name="skill" min="[aData.oclAsType(Range).minValue/]" max="[aData.oclAsType(Range).maxValue/]" value="1" type="range" oninput="outflying.value=parseInt(skill.value)" [if(aData.requiered)]required[/if]>
+        <output name="outflying" for="skill">[aData.oclAsType(Range).minValue/]</output>
+        <label for="skill"> [aData.name/] ([aData.oclAsType(Range).minValue/] low - [aData.oclAsType(Range).maxValue/] high) </label>
+
+    </div>
+[elseif(aData.oclIsTypeOf(Date))]
+	 <div name="date">
+
+	     <label for="date">[aData.name/]</label> 
+	     <input name="date" type="datetime-local" autofocus [if(aData.requiered)]required[/if]>
+ 
+	 </div>
+[elseif(aData.oclIsTypeOf(Phone))]
+	 <div name="teldiv">
+
+		<label for="tel">[aData.name/]</label>
+	    <input name="tel" type="tel" autofocus [if(aData.requiered)]required[/if]>
+ 
+	 </div>
+[/if]
+[/for]
+[/template]
+
+[template public simulateData(aData : Data)]
+
+[if(aData.oclIsTypeOf(Number))]
+	[if(aData.name.contains('Price'))]
+		30$
+	[elseif(aData.name.contains('Quantity'))]
+		1
+	[else]
+		1
+	[/if]
+[elseif(aData.oclIsTypeOf(Text))]
+	[if(aData.name.contains('Name'))]
+		Josh
+	[elseif(aData.name.contains('LastName'))]
+		NukeDuck
+	[else]
+		whathever
+	[/if]
+[elseif(aData.oclIsTypeOf(File))]
+	[if(aData.name.strcmp('M') < 1)]
+		document.pdf
+	[else]
+		shippingletter.docx
+	[/if]
+[elseif(aData.oclIsTypeOf(CheckBox))]
+[aData.oclAsType(CheckBox).options.fieldname/]
+[elseif(aData.oclIsTypeOf(Range))]
+	[if(aData.name.strcmp('M') < 1)]
+		90
+	[else]
+		50
+	[/if]
+[elseif(aData.oclIsTypeOf(Date))]
+		20/9/2019
+[elseif(aData.oclIsTypeOf(Phone))]
+	[if(aData.name.strcmp('M') < 1)]
+		+34 617351210
+	[else]
+		925555450
+	[/if]
+[else]
+	XXXXXXXXX
+[/if]
+[/template]

@@ -1,0 +1,306 @@
+[comment encoding = UTF-8 /]
+[module generateHTML('http://www.unex.dmss.es/WorkFlowMM')]
+[import org::eclipse::acceleo::module::generateApplication::main::generateDataHTML/]
+
+[template public generateTaskHTML(anOp : Operation, anAct : Actor)]
+[if(anOp.oclIsTypeOf(UserTask))]
+[generateUserTaskHTML(anOp.oclAsType(UserTask), anAct)/]
+[elseif(anOp.oclIsTypeOf(ServiceTask))]
+[generateServiceTaskHTML(anOp.oclAsType(ServiceTask), anAct)/]
+[elseif(anOp.oclIsTypeOf(SendMsg))]
+[generateSendTaskHTML(anOp.oclAsType(SendMsg), anAct)/]
+[elseif(anOp.oclIsTypeOf(ReceiveMsg))]
+[generateRecTaskHTML(anOp.oclAsType(ReceiveMsg), anAct)/]
+[elseif(anOp.oclIsTypeOf(Initial))]
+[generateStartView(anOp, anAct)/]
+[elseif(anOp.oclIsTypeOf(Final))]
+[generateEndHTML(anAct)/]
+[elseif(anOp.oclIsTypeOf(Decision))]
+[generateDecisionHTML(anOp.oclAsType(Decision), anAct)/])]
+[/if]
+[/template]
+
+[template public generateActorView(aWorkFlow : WorkFlow)]
+
+[for (anActor : Actor | aWorkFlow.actors)]
+
+[file ('/'+anActor.Name+'/'+anActor.Name+'index.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../estilo.css">
+    <title>[anActor.Name/]</title>
+</head>
+
+<body>
+		<div id="act">
+	        <div name="actor" id="actor1">
+	           <span id="startspan">
+		[if(anActor.Male)]
+			[if(anActor.Name.strcmp('M') < 1)]
+						<img id="actor_img" src="../images/man%20(1).svg" alt="Actor Icon">
+			[else]
+						<img id="actor_img" src="../images/man.svg" alt="Actor Icon">
+			[/if]
+		[else]
+						<img id="actor_img" src="../images/teacher.svg" alt="Actor Icon">
+		[/if]   
+				       <p id="name"><strong>[anActor.Name/]</strong></p>   
+					   <span id="startext">
+							<p>Select one Task to start.</p>                 
+					   </span>  	          
+	           </span>
+			<div id="tasks">
+	           		 <h1>Wellcome [anActor.Name/]</h1>
+	           		 <h2>Select one of these tasks requested to do: </h2>
+	[for(anOp : Operation | anActor.operations)]
+		[if(anOp.oclIsTypeOf(ReceiveMsg))]
+        			<a href="['Task'+anOp.ID+'.html'/]">Manage requests for [anOp.oclAsType(Task).name/]</a>
+			[for(Op : Operation | anOp.next)]
+			[if(Op <> null)]
+				[if(Op.oclIsTypeOf(Final))]
+					<p>End the process.</p>
+				[/if]
+			[/if]
+			[/for]
+		[elseif(anOp.oclIsTypeOf(Initial))]
+					<a href="['Start'+anActor.Name+'.html'/]">Wellcome page, start the process.</a>
+		[/if]
+	[/for]
+			</div>
+
+        </div>
+	</div>
+
+</body>
+</html>
+[/file]
+[/for]
+[/template]
+
+[template public generateStartView(anOp : Operation, anActor : Actor)]
+[file ('/'+anActor.Name+'/Start'+anActor.Name+'.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../estilo.css">
+    <title>Start[anActor.Name/]</title>
+</head>
+
+<body>
+	<h1>Wellcome to [anActor.eContainer().oclAsType(WorkFlow).name/] Web</h1>
+
+	<div id="">
+	        <p id="startp">Start the process with the task [anOp.next.oclAsType(Task).name/]
+				<a href="['Task'+anOp.next.ID+'.html'/]" >
+	            <img id="start" src="../images/start.svg">
+	        </a></p>
+	</div>
+
+    <footer>
+        
+    </footer>
+
+</body>
+</html>
+[/file]    
+[/template]
+
+[template public generateUserTaskHTML(aTask : UserTask, anAct : Actor)]
+[file ('/'+anAct.Name+'/Task'+aTask.ID+'.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ['Task'+aTask.name/] </title>
+    <link rel="stylesheet" href="../estilo.css">
+</head>
+
+<body>
+	<h1 class="">Task [aTask.name/]</h1>
+    <p class=""> This is a task for [aTask.descript/]</p>
+
+	<form id="form[aTask.ID/]">
+
+	[generateDataGroup(aTask.input)/]
+        <div name="submitdiv">
+	       <input name="submitinp" type="submit"> 
+	    </div>
+	</form>	
+	
+	<footer>
+[nextTask(aTask.oclAsType(Operation), anAct)/]
+
+	</footer>
+</body>
+</html>
+[/file]
+[/template]
+
+[template public generateServiceTaskHTML(aTask : ServiceTask, anAct : Actor)]
+[file ('/'+anAct.Name+'/Task'+aTask.ID+'.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ['Task'+aTask.name/] </title>
+    <link rel="stylesheet" href="../estilo.css">
+</head>
+
+<body>
+	<h1 class="">Task [aTask.name/]</h1>
+    <p class=""> This is a Service task for [aTask.descript/]</p>
+
+	<div>
+		<div name="submitdiv">
+	        <input name="submitinp" type="submit"> 
+			<label for="submitinp">Execute task for [aTask.name/]</label> 
+	    </div>
+	</div>
+
+	<footer>
+[nextTask(aTask.oclAsType(Operation), anAct)/]
+	</footer>
+</body>
+</html>
+[/file]	
+[/template]
+
+[template public generateSendTaskHTML(aTask : SendMsg, anAct : Actor)]
+[file ('/'+anAct.Name+'/Task'+aTask.ID+'.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> [aTask.name/] </title>
+    <link rel="stylesheet" href="../estilo.css">
+</head>
+
+<body>
+	<h1 class="">Message [aTask.name/]</h1>
+    <p class=""> This is a Message for [aTask.descript/]</p>
+
+	<div>
+		<div name="submitdiv">
+	        <input name="submitinp" type="submit"> 
+			<label for="submitinp">Send request</label> 
+	    </div>
+	</div>
+		
+	<footer>
+[nextTask(aTask.oclAsType(Operation), anAct)/]
+	</footer>
+</body>
+</html>
+[/file]	
+[/template]
+[template public generateRecTaskHTML(aTask : ReceiveMsg, anAct : Actor)]
+[file ('/'+anAct.Name+'/Task'+aTask.ID+'.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> [aTask.name/] </title>
+    <link rel="stylesheet" href="../estilo.css">
+</head>
+
+<body>
+	<h1 class="">Requests for [aTask.name/]</h1>
+    <p class=""> This is a Message for [aTask.descript/]</p>
+
+	<p></p>
+	<div class="tablediv">
+		<table id="tablet">
+		  <tr>
+	[for(aData : Data | aTask.attachRec.data)]
+		    [if(aData.requiered)]<th>[aData.name/]</th>[/if]
+	[/for]
+			<th> </th>
+		  </tr>
+[for(d : Data | aTask.attachRec.data)]
+		  <tr>
+
+	[for(aData : Data | aTask.attachRec.data)]
+		    [if(aData.requiered)]<td>[simulateData(aData)/]</td>[/if]
+	[/for]
+			<td> 
+			[nextTask(aTask.oclAsType(Operation), anAct)/]
+			</td>
+		  
+		  </tr>
+[/for]
+
+		</table>
+	</div>
+	
+</body>
+</html>
+[/file]	
+[/template]
+
+[template public generateEndHTML(anAct : Actor)]
+[file ('EndProcess.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="estilo.css">
+    <title>End</title>
+</head>
+
+<body>
+    <div id="end">
+        <p><strong>Process finished!</strong></p>
+    </div>
+</body>
+</html>
+[/file]
+[/template]
+
+[template public generateDecisionHTML(dec : Decision, anAct : Actor)]
+[file ('/'+anAct.Name+'/Task'+dec.ID+'.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../estilo.css">
+    <title>End</title>
+</head>
+
+<body>
+    <div id="dec">
+        <p>[dec.question/]?</p>
+    </div>
+	
+	<div>
+[for(Op : Operation | dec.next)]
+[if(Op <> null)]
+	<div id="">
+	        <p id="decdiv">Continue the process with Task[Op.ID/]
+[nextTask(Op, anAct)/]
+			</p>
+	</div>
+[/if]
+[/for]
+</body>
+</html>
+[/file]
+[/template]
