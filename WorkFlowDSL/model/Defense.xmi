@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkFlowMM:WorkFlow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:WorkFlowMM="http://www.unex.dmss.es/WorkFlowMM">
+  <actors Name="Student" ID="Stud">
+    <operations xsi:type="WorkFlowMM:UserTask" ID="Get_Student_Data" name="Get_Student_Data" descript=""/>
+  </actors>
+  <actors Name="Secretary" ID="Secret" Male="false"/>
+  <actors Name="Dean" ID="Dean"/>
+</WorkFlowMM:WorkFlow>

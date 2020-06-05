@@ -1,0 +1,7 @@
+# Tracing options for the WorkFlowDSL.diagram plug-in
+
+# Common issues
+WorkFlowDSL.diagram/debug=false
+
+# Visual IDs
+WorkFlowDSL.diagram/debug/visualID=false

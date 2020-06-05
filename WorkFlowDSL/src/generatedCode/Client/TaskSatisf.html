@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> TaskSatisfactionForm </title>
+    <link rel="stylesheet" href="../estilo.css">
+</head>
+
+<body>
+	<h1 class="">Task SatisfactionForm</h1>
+    <p class=""> This is a task for </p>
+
+	<form id="formSatisf">
+
+	    <div class="string">
+	 
+	        <label for="string">Delivery :</label>  
+	        <input id="string" name="string" placeholder="Introduce the text..." type="text" autofocus required>
+	
+		</div>
+	    <div class="string">
+	 
+	        <label for="string">Name :</label>  
+	        <input id="string" name="string" placeholder="Introduce the text..." type="text" autofocus required>
+	
+		</div>
+	    <div class="string">
+	 
+	        <label for="string">Opinion :</label>  
+	        <input id="string" name="string" placeholder="Introduce the text..." type="text" autofocus required>
+	
+		</div>
+	    <div name="range">
+	      
+	        <input id="skill" name="skill" min="0" max="100" value="1" type="range" oninput="outflying.value=parseInt(skill.value)" required>
+	        <output name="outflying" for="skill">0</output>
+	        <label for="skill"> Satisfaction (0 low - 100 high) </label>
+	
+	    </div>
+	
+        <div name="submitdiv">
+	       <input name="submitinp" type="submit"> 
+	    </div>
+	</form>	
+	
+	<footer>
+
+		<a href="TaskSendSatisf.html">
+			<img src="../images/next.svg">
+		</a>
+
+
+	</footer>
+</body>
+</html>

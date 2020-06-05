@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="WorkFlowMM" nsURI="http://www.unex.dmss.es/WorkFlowMM" nsPrefix="WorkFlowMM">
+  <eAnnotations source="gmf"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkFlow">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="initialTaskMustBeOne finalTaskMustBeOne TaskMustBePrecededByOneOperation"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="initialTaskMustBeOne" value="&#xA;&#x9;&#x9;&#x9;self.actors.operations->selectByType(Initial)->size() = 1"/>
+      <details key="finalTaskMustBeOne" value="&#xA;&#x9;&#x9;&#x9;self.actors.operations->selectByType(Final)->size() = 1"/>
+      <details key="TaskMustBePrecededByOneOperation" value="&#xA;&#x9;&#x9;&#x9;self.actors.operations->forAll( op1,op2 : Operation |&#xA;&#x9;&#x9;&#x9;&#x9;op1.next->forAll(op3 : Operation |&#xA;&#x9;&#x9;&#x9;&#x9;((op3.oclIsKindOf(Task) or op3.oclIsKindOf(Decision))and op3 &lt;> null and op1 &lt;> op2) implies op2.next->forAll(op4 : Operation | &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;((op4.oclIsKindOf(Task) or op4.oclIsKindOf(Decision)) and op4 &lt;> null) implies op3 &lt;> op4&#xA;&#x9;&#x9;&#x9;&#x9;)))"/>
+    </eAnnotations>
+    <eAnnotations source="gmf.diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actors" lowerBound="1"
+        upperBound="-1" eType="#//Actor" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Actor">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+      <details key="border.color" value="0,0,0"/>
+      <details key="color" value="250,250,200"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" lowerBound="1"
+        upperBound="-1" eType="#//Operation" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" upperBound="-1" eType="#//DataGroup"
+        containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="collapsible" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Male" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="InitialTaskMustNotBePreceded NextOperationMustNotBeItself NextOperationToAnotherActorMustNeedASendMsgTask"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="InitialTaskMustNotBePreceded" value="&#xA;&#x9;&#x9;&#x9;self.next->forAll(op : Operation |&#xA;&#x9;&#x9;&#x9;&#x9;not op.oclIsTypeOf(Initial)&#xA;&#x9;&#x9;&#x9;)"/>
+      <details key="NextOperationMustNotBeItself" value="&#xA;&#x9;&#x9;&#x9;self.next->forAll(op : Operation |&#xA;&#x9;&#x9;&#x9;&#x9;op &lt;> self&#xA;&#x9;&#x9;&#x9;)"/>
+      <details key="NextOperationToAnotherActorMustNeedASendMsgTask" value="&#xA;&#x9;&#x9;&#x9;self.next->forAll(op : Operation |&#xA;&#x9;&#x9;&#x9;&#x9;(not self.oclIsTypeOf(SendMsg)) implies op.oclContainer = self.oclContainer&#xA;&#x9;&#x9;&#x9;)"/>
+    </eAnnotations>
+    <eAnnotations source="gmf.node">
+      <details key="label" value="ID"/>
+      <details key="border.color" value="0,0,0"/>
+      <details key="color" value="250,250,200"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next" upperBound="2" eType="#//Operation">
+      <eAnnotations source="gmf.link">
+        <details key="label.icon" value="false"/>
+        <details key="width" value="2"/>
+        <details key="color" value="0,0,0"/>
+        <details key="target.decoration" value="arrow"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" abstract="true" eSuperTypes="#//Operation">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="ID"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="descript" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Decision" eSuperTypes="#//Operation">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="ID"/>
+      <details key="border.color" value="0,0,0"/>
+      <details key="color" value="250,250,200"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="question" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceTask" eSuperTypes="#//Task">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generates" lowerBound="1"
+        eType="#//DataGroup">
+      <eAnnotations source="gmf.link">
+        <details key="border.color" value="100,0,0"/>
+        <details key="style" value="dash"/>
+        <details key="width" value="1"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requires" eType="#//DataGroup">
+      <eAnnotations source="gmf.link">
+        <details key="border.color" value="0,0,100"/>
+        <details key="style" value="dot"/>
+        <details key="width" value="2"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Message" abstract="true" eSuperTypes="#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataGroup">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" lowerBound="1" upperBound="-1"
+        eType="#//Data" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="collapsible" value="true"/>
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Label" eSuperTypes="#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UserTask" eSuperTypes="#//Task">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="TaskMustHasOneSuccessor"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="TaskMustHasOneSuccessor" value="&#xA;&#x9;&#x9;&#x9;self.next->size() = 1"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1" eType="#//DataGroup">
+      <eAnnotations source="gmf.link">
+        <details key="border.color" value="0,100,0"/>
+        <details key="style" value="dot"/>
+        <details key="width" value="2"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Initial" eSuperTypes="#//Label"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Final" eSuperTypes="#//Label">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="FinalTaskMustNotHasAnySuccessor"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="FinalTaskMustNotHasAnySuccessor" value="&#xA;&#x9;&#x9;&#x9;self.next->size() = 0"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="File" eSuperTypes="#//Data">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extension" upperBound="-1"
+        eType="#//Extension" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Number" eSuperTypes="#//Data"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Text" eSuperTypes="#//Data"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CheckBox" eSuperTypes="#//Data">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="options" lowerBound="1"
+        upperBound="-1" eType="#//Option" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="collapsible" value="true"/>
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Option">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="fieldname"/>
+      <details key="border.color" value="0,0,0"/>
+      <details key="color" value="100,100,100"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SendMsg" eSuperTypes="#//Message">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="SendMsgMustBeSendToADifferentActorThanItself SendMsgMustBeConnectToAReceiveMsg"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="SendMsgMustBeSendToADifferentActorThanItself" value="&#xA;&#x9;&#x9;&#x9;self.oclContainer &lt;> self.next.oclContainer"/>
+      <details key="SendMsgMustBeConnectToAReceiveMsg" value="&#xA;&#x9;&#x9;&#x9;self.next->forAll(op : Operation | &#xA;&#x9;&#x9;&#x9;&#x9;op &lt;> null implies op.oclIsTypeOf(ReceiveMsg)&#xA;&#x9;&#x9;&#x9;)"/>
+    </eAnnotations>
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="label.icon" value="false"/>
+      <details key="figure" value="svg"/>
+      <details key="label.placement" value="external"/>
+      <details key="svg.uri" value="platform:/plugin/WorkFlowDSL/src/generatedCode/images/send.svg"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attachSend" eType="#//DataGroup">
+      <eAnnotations source="gmf.link">
+        <details key="border.color" value="100,0,100"/>
+        <details key="style" value="dot"/>
+        <details key="width" value="2"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="navigatesTo" eType="#//Task">
+      <eAnnotations source="gmf.link">
+        <details key="label.icon" value="false"/>
+        <details key="width" value="1"/>
+        <details key="color" value="0,0,0"/>
+        <details key="target.decoration" value="arrow"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReceiveMsg" eSuperTypes="#//Message">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="label.icon" value="false"/>
+      <details key="figure" value="svg"/>
+      <details key="label.placement" value="external"/>
+      <details key="svg.uri" value="platform:/plugin/WorkFlowDSL/src/generatedCode/images/receive.svg"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attachRec" eType="#//DataGroup">
+      <eAnnotations source="gmf.link">
+        <details key="border.color" value="0,100,100"/>
+        <details key="style" value="dot"/>
+        <details key="width" value="2"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Data" abstract="true">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="border.color" value="0,0,0"/>
+      <details key="color" value="150,100,100"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiered" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Image" eSuperTypes="#//Data">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="src" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alt" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Range" eSuperTypes="#//Data">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Extension">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Date" eSuperTypes="#//Data"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Phone" eSuperTypes="#//Data"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Operation"/>
+</ecore:EPackage>

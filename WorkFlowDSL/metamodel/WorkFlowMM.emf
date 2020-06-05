@@ -1,0 +1,172 @@
+@gmf
+@namespace(uri="http://www.unex.dmss.es/WorkFlowMM", prefix="WorkFlowMM")
+package WorkFlowMM;
+
+@Ecore(constraints="initialTaskMustBeOne finalTaskMustBeOne TaskMustBePrecededByOneOperation")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(initialTaskMustBeOne="
+			self.actors.operations->selectByType(Initial)->size() = 1", finalTaskMustBeOne="
+			self.actors.operations->selectByType(Final)->size() = 1", TaskMustBePrecededByOneOperation="
+			self.actors.operations->forAll( op1,op2 : Operation |
+				op1.next->forAll(op3 : Operation |
+				((op3.oclIsKindOf(Task) or op3.oclIsKindOf(Decision))and op3 <> null and op1 <> op2) implies op2.next->forAll(op4 : Operation | 
+					((op4.oclIsKindOf(Task) or op4.oclIsKindOf(Decision)) and op4 <> null) implies op3 <> op4
+				)))")
+@gmf.diagram
+class WorkFlow {
+  attr String name;
+  val Actor[+] actors;
+}
+
+@gmf.node(label="Name", border.color="0,0,0", color="250,250,200")
+class Actor {
+
+  @gmf.compartment
+  val Operation[+] operations;
+  attr String Name;
+  id attr String ID;
+
+  @gmf.compartment(collapsible="true")
+  val DataGroup[*] data;
+  attr boolean Male = true;
+}
+
+@Ecore(constraints="InitialTaskMustNotBePreceded NextOperationMustNotBeItself NextOperationToAnotherActorMustNeedASendMsgTask")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(InitialTaskMustNotBePreceded="
+			self.next->forAll(op : Operation |
+				not op.oclIsTypeOf(Initial)
+			)", NextOperationMustNotBeItself="
+			self.next->forAll(op : Operation |
+				op <> self
+			)", NextOperationToAnotherActorMustNeedASendMsgTask="
+			self.next->forAll(op : Operation |
+				(not self.oclIsTypeOf(SendMsg)) implies op.oclContainer = self.oclContainer
+			)")
+@gmf.node(label="ID", border.color="0,0,0", color="250,250,200")
+abstract class Operation {
+  id attr String ID;
+
+  @gmf.link(label.icon="false", width="2", color="0,0,0", target.decoration="arrow")
+  ref Operation[0..2] next;
+}
+
+@gmf.node(label="name", label="ID")
+abstract class Task extends Operation {
+  attr String name;
+  attr String descript;
+}
+
+@gmf.node(label="ID", border.color="0,0,0", color="250,250,200")
+class Decision extends Operation {
+  attr String question;
+}
+
+class ServiceTask extends Task {
+
+  @gmf.link(border.color="100,0,0", style="dash", width="1")
+  ref DataGroup[1] generates;
+
+  @gmf.link(border.color="0,0,100", style="dot", width="2")
+  ref DataGroup requires;
+}
+
+abstract class Message extends Task {
+}
+
+@gmf.node(label="Name")
+class DataGroup {
+
+  @gmf.compartment(collapsible="true", layout="list")
+  val Data[+] data;
+  attr String Name;
+}
+
+class Label extends Task {
+}
+
+@Ecore(constraints="TaskMustHasOneSuccessor")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(TaskMustHasOneSuccessor="
+			self.next->size() = 1")
+class UserTask extends Task {
+
+  @gmf.link(border.color="0,100,0", style="dot", width="2")
+  ref DataGroup[1] input;
+}
+
+class Initial extends Label {
+}
+
+@Ecore(constraints="FinalTaskMustNotHasAnySuccessor")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(FinalTaskMustNotHasAnySuccessor="
+			self.next->size() = 0")
+class Final extends Label {
+}
+
+class File extends Data {
+  val Extension[*] extension;
+}
+
+class Number extends Data {
+}
+
+class Text extends Data {
+}
+
+class CheckBox extends Data {
+@gmf.compartment(collapsible="true", layout="list")
+  val Option[+] options;
+}
+@gmf.node(label="fieldname", border.color="0,0,0", color="100,100,100")
+class Option {
+  attr String fieldname;
+}
+
+@Ecore(constraints="SendMsgMustBeSendToADifferentActorThanItself SendMsgMustBeConnectToAReceiveMsg")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(SendMsgMustBeSendToADifferentActorThanItself="
+			self.oclContainer <> self.next.oclContainer", SendMsgMustBeConnectToAReceiveMsg="
+			self.next->forAll(op : Operation | 
+				op <> null implies op.oclIsTypeOf(ReceiveMsg)
+			)")
+@gmf.node(label="name", label.icon="false", figure="svg",label.placement="external", svg.uri="platform:/plugin/WorkFlowDSL/src/generatedCode/images/send.svg")
+class SendMsg extends Message {
+
+  @gmf.link(border.color="100,0,100", style="dot", width="2")
+  ref DataGroup attachSend;
+   @gmf.link(label.icon="false", width="1", color="0,0,0", target.decoration="arrow")
+  ref Task navigatesTo;
+}
+@gmf.node(label="name", label.icon="false", figure="svg",label.placement="external", svg.uri="platform:/plugin/WorkFlowDSL/src/generatedCode/images/receive.svg")
+class ReceiveMsg extends Message {
+
+  @gmf.link(border.color="0,100,100", style="dot", width="2")
+  ref DataGroup attachRec;
+}
+
+@gmf.node(label="name", border.color="0,0,0", color="150,100,100")
+abstract class Data {
+  attr String name;
+  attr boolean requiered;
+}
+
+class Image extends Data {
+  attr String src;
+  attr String alt;
+}
+
+class Range extends Data {
+  attr int minValue;
+  attr int maxValue;
+}
+
+class Extension {
+  attr String extension;
+}
+
+class Date extends Data {
+}
+
+class Phone extends Data {
+}
+
+class Join extends Operation {
+}
+

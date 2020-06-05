@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="" modelDirectory="/WorkFlowDSL/src" modelPluginID="WorkFlowDSL"
+    modelName="WorkFlowMM" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>WorkFlowMM.emf</foreignModel>
+  <genPackages prefix="WorkFlowMM" disposableProviderFactory="true" ecorePackage="WorkFlowMM.ecore#/">
+    <genClasses ecoreClass="WorkFlowMM.ecore#//WorkFlow">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//WorkFlow/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//WorkFlow/actors"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Actor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//Actor/operations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Actor/Name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Actor/ID"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//Actor/data"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Actor/Male"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="WorkFlowMM.ecore#//Operation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Operation/ID"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//Operation/next"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="WorkFlowMM.ecore#//Task">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Task/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Task/descript"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Decision">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Decision/question"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//ServiceTask">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//ServiceTask/generates"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//ServiceTask/requires"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="WorkFlowMM.ecore#//Message"/>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//DataGroup">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//DataGroup/data"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//DataGroup/Name"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Label"/>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//UserTask">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//UserTask/input"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Initial"/>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Final"/>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//File">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//File/extension"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Number"/>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Text"/>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//CheckBox">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//CheckBox/options"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Option">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Option/fieldname"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//SendMsg">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//SendMsg/attachSend"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//SendMsg/navigatesTo"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//ReceiveMsg">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference WorkFlowMM.ecore#//ReceiveMsg/attachRec"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="WorkFlowMM.ecore#//Data">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Data/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Data/requiered"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Image">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Image/src"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Image/alt"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Range">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Range/minValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Range/maxValue"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Extension">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WorkFlowMM.ecore#//Extension/extension"/>
+    </genClasses>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Date"/>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Phone"/>
+    <genClasses ecoreClass="WorkFlowMM.ecore#//Join"/>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="ASCII"?>
+<gmfgraph:Canvas xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="WorkFlowMM">
+  <figures name="Default">
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="OperationNextFigureTargetDecoration"/>
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="SendMsgNavigatesToFigureTargetDecoration"/>
+    <descriptors name="ActorFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="ActorFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="250" green="250" blue="200"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ActorLabelFigure" text="Actor">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="ActorOperationsCompartmentFigure" outline="false"/>
+        <children xsi:type="gmfgraph:Rectangle" name="ActorDataCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureActorLabelFigure" figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
+      <accessors accessor="getActorOperationsCompartmentFigure" figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
+      <accessors accessor="getActorDataCompartmentFigure" figure="//@figures.0/@descriptors.0/@actualFigure/@children.2"/>
+    </descriptors>
+    <descriptors name="DecisionFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="DecisionFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="250" green="250" blue="200"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="DecisionLabelFigure" text="Decision"/>
+      </actualFigure>
+      <accessors accessor="getFigureDecisionLabelFigure" figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="ServiceTaskFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="ServiceTaskFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="250" green="250" blue="200"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ServiceTaskLabelFigure" text="ServiceTask"/>
+      </actualFigure>
+      <accessors accessor="getFigureServiceTaskLabelFigure" figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="DataGroupFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="DataGroupFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="DataGroupLabelFigure" text="DataGroup">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="DataGroupDataCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureDataGroupLabelFigure" figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
+      <accessors accessor="getDataGroupDataCompartmentFigure" figure="//@figures.0/@descriptors.3/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="LabelFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="LabelFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="250" green="250" blue="200"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="LabelLabelFigure" text="Label"/>
+      </actualFigure>
+      <accessors accessor="getFigureLabelLabelFigure" figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="UserTaskFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="UserTaskFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="250" green="250" blue="200"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="UserTaskLabelFigure" text="UserTask"/>
+      </actualFigure>
+      <accessors accessor="getFigureUserTaskLabelFigure" figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="InitialFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="InitialFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="250" green="250" blue="200"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="InitialLabelFigure" text="Initial"/>
+      </actualFigure>
+      <accessors accessor="getFigureInitialLabelFigure" figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="FinalFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="FinalFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="250" green="250" blue="200"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="FinalLabelFigure" text="Final"/>
+      </actualFigure>
+      <accessors accessor="getFigureFinalLabelFigure" figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="FileFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="FileFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="150" green="100" blue="100"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="FileLabelFigure" text="File"/>
+      </actualFigure>
+      <accessors accessor="getFigureFileLabelFigure" figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="NumberFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="NumberFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="150" green="100" blue="100"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="NumberLabelFigure" text="Number"/>
+      </actualFigure>
+      <accessors accessor="getFigureNumberLabelFigure" figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="TextFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="TextFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="150" green="100" blue="100"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="TextLabelFigure" text="Text"/>
+      </actualFigure>
+      <accessors accessor="getFigureTextLabelFigure" figure="//@figures.0/@descriptors.10/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="CheckBoxFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="CheckBoxFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="150" green="100" blue="100"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="CheckBoxLabelFigure" text="CheckBox">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="CheckBoxOptionsCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureCheckBoxLabelFigure" figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
+      <accessors accessor="getCheckBoxOptionsCompartmentFigure" figure="//@figures.0/@descriptors.11/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="OptionFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="OptionFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="100" green="100" blue="100"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="OptionLabelFigure" text="Option"/>
+      </actualFigure>
+      <accessors accessor="getFigureOptionLabelFigure" figure="//@figures.0/@descriptors.12/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="SendMsgFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="SendMsgFigure" documentURI="platform:/plugin/WorkFlowDSL/src/generatedCode/images/send.svg">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="250" green="250" blue="200"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="SendMsgLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="SendMsgLabelFigure" text="SendMsg"/>
+    </descriptors>
+    <descriptors name="ReceiveMsgFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="ReceiveMsgFigure" documentURI="platform:/plugin/WorkFlowDSL/src/generatedCode/images/receive.svg">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="250" green="250" blue="200"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="ReceiveMsgLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="ReceiveMsgLabelFigure" text="ReceiveMsg"/>
+    </descriptors>
+    <descriptors name="ImageFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="ImageFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="150" green="100" blue="100"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ImageLabelFigure" text="Image"/>
+      </actualFigure>
+      <accessors accessor="getFigureImageLabelFigure" figure="//@figures.0/@descriptors.17/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="RangeFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="RangeFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="150" green="100" blue="100"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="RangeLabelFigure" text="Range"/>
+      </actualFigure>
+      <accessors accessor="getFigureRangeLabelFigure" figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="DateFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="DateFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="150" green="100" blue="100"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="DateLabelFigure" text="Date"/>
+      </actualFigure>
+      <accessors accessor="getFigureDateLabelFigure" figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="PhoneFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="PhoneFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="150" green="100" blue="100"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="PhoneLabelFigure" text="Phone"/>
+      </actualFigure>
+      <accessors accessor="getFigurePhoneLabelFigure" figure="//@figures.0/@descriptors.20/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="JoinFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="JoinFigure">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+        <backgroundColor xsi:type="gmfgraph:RGBColor" red="250" green="250" blue="200"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="JoinLabelFigure" text="Join"/>
+      </actualFigure>
+      <accessors accessor="getFigureJoinLabelFigure" figure="//@figures.0/@descriptors.21/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="OperationNextFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="OperationNextFigure" lineWidth="2" targetDecoration="//@figures.0/@figures.0">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="OperationNextExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="OperationNextExternalLabel"/>
+    </descriptors>
+    <descriptors name="ServiceTaskGeneratesFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="ServiceTaskGeneratesFigure" lineKind="LINE_DASH"/>
+    </descriptors>
+    <descriptors name="ServiceTaskGeneratesExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="ServiceTaskGeneratesExternalLabel"/>
+    </descriptors>
+    <descriptors name="ServiceTaskRequiresFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="ServiceTaskRequiresFigure" lineWidth="2" lineKind="LINE_DOT"/>
+    </descriptors>
+    <descriptors name="ServiceTaskRequiresExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="ServiceTaskRequiresExternalLabel"/>
+    </descriptors>
+    <descriptors name="UserTaskInputFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="UserTaskInputFigure" lineWidth="2" lineKind="LINE_DOT"/>
+    </descriptors>
+    <descriptors name="UserTaskInputExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="UserTaskInputExternalLabel"/>
+    </descriptors>
+    <descriptors name="SendMsgAttachSendFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="SendMsgAttachSendFigure" lineWidth="2" lineKind="LINE_DOT"/>
+    </descriptors>
+    <descriptors name="SendMsgAttachSendExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="SendMsgAttachSendExternalLabel"/>
+    </descriptors>
+    <descriptors name="SendMsgNavigatesToFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="SendMsgNavigatesToFigure" targetDecoration="//@figures.0/@figures.1">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="SendMsgNavigatesToExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="SendMsgNavigatesToExternalLabel"/>
+    </descriptors>
+    <descriptors name="ReceiveMsgAttachRecFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="ReceiveMsgAttachRecFigure" lineWidth="2" lineKind="LINE_DOT"/>
+    </descriptors>
+    <descriptors name="ReceiveMsgAttachRecExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="ReceiveMsgAttachRecExternalLabel"/>
+    </descriptors>
+  </figures>
+  <nodes name="Actor" figure="ActorFigure"/>
+  <nodes name="Decision" figure="DecisionFigure"/>
+  <nodes name="ServiceTask" figure="ServiceTaskFigure"/>
+  <nodes name="DataGroup" figure="DataGroupFigure"/>
+  <nodes name="Label" figure="LabelFigure"/>
+  <nodes name="UserTask" figure="UserTaskFigure"/>
+  <nodes name="Initial" figure="InitialFigure"/>
+  <nodes name="Final" figure="FinalFigure"/>
+  <nodes name="File" figure="FileFigure"/>
+  <nodes name="Number" figure="NumberFigure"/>
+  <nodes name="Text" figure="TextFigure"/>
+  <nodes name="CheckBox" figure="CheckBoxFigure"/>
+  <nodes name="Option" figure="OptionFigure"/>
+  <nodes name="SendMsg" figure="SendMsgFigure"/>
+  <nodes name="ReceiveMsg" figure="ReceiveMsgFigure"/>
+  <nodes name="Image" figure="ImageFigure"/>
+  <nodes name="Range" figure="RangeFigure"/>
+  <nodes name="Date" figure="DateFigure"/>
+  <nodes name="Phone" figure="PhoneFigure"/>
+  <nodes name="Join" figure="JoinFigure"/>
+  <connections name="OperationNext" figure="OperationNextFigure"/>
+  <connections name="ServiceTaskGenerates" figure="ServiceTaskGeneratesFigure"/>
+  <connections name="ServiceTaskRequires" figure="ServiceTaskRequiresFigure"/>
+  <connections name="UserTaskInput" figure="UserTaskInputFigure"/>
+  <connections name="SendMsgAttachSend" figure="SendMsgAttachSendFigure"/>
+  <connections name="SendMsgNavigatesTo" figure="SendMsgNavigatesToFigure"/>
+  <connections name="ReceiveMsgAttachRec" figure="ReceiveMsgAttachRecFigure"/>
+  <compartments name="ActorOperationsCompartment" figure="ActorFigure" collapsible="true" accessor="//@figures.0/@descriptors.0/@accessors.1"/>
+  <compartments name="ActorDataCompartment" figure="ActorFigure" collapsible="true" accessor="//@figures.0/@descriptors.0/@accessors.2"/>
+  <compartments name="DataGroupDataCompartment" figure="DataGroupFigure" collapsible="true" accessor="//@figures.0/@descriptors.3/@accessors.1"/>
+  <compartments name="CheckBoxOptionsCompartment" figure="CheckBoxFigure" collapsible="true" accessor="//@figures.0/@descriptors.11/@accessors.1"/>
+  <labels name="ActorLabel" figure="ActorFigure" accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+  <labels name="DecisionLabel" figure="DecisionFigure" accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+  <labels name="ServiceTaskLabel" figure="ServiceTaskFigure" accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+  <labels name="DataGroupLabel" figure="DataGroupFigure" accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+  <labels name="LabelLabel" figure="LabelFigure" accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+  <labels name="UserTaskLabel" figure="UserTaskFigure" accessor="//@figures.0/@descriptors.5/@accessors.0"/>
+  <labels name="InitialLabel" figure="InitialFigure" accessor="//@figures.0/@descriptors.6/@accessors.0"/>
+  <labels name="FinalLabel" figure="FinalFigure" accessor="//@figures.0/@descriptors.7/@accessors.0"/>
+  <labels name="FileLabel" figure="FileFigure" accessor="//@figures.0/@descriptors.8/@accessors.0"/>
+  <labels name="NumberLabel" figure="NumberFigure" accessor="//@figures.0/@descriptors.9/@accessors.0"/>
+  <labels name="TextLabel" figure="TextFigure" accessor="//@figures.0/@descriptors.10/@accessors.0"/>
+  <labels name="CheckBoxLabel" figure="CheckBoxFigure" accessor="//@figures.0/@descriptors.11/@accessors.0"/>
+  <labels name="OptionLabel" figure="OptionFigure" accessor="//@figures.0/@descriptors.12/@accessors.0"/>
+  <labels name="SendMsgLabel" figure="SendMsgLabelFigure" elementIcon="false"/>
+  <labels name="ReceiveMsgLabel" figure="ReceiveMsgLabelFigure" elementIcon="false"/>
+  <labels name="ImageLabel" figure="ImageFigure" accessor="//@figures.0/@descriptors.17/@accessors.0"/>
+  <labels name="RangeLabel" figure="RangeFigure" accessor="//@figures.0/@descriptors.18/@accessors.0"/>
+  <labels name="DateLabel" figure="DateFigure" accessor="//@figures.0/@descriptors.19/@accessors.0"/>
+  <labels name="PhoneLabel" figure="PhoneFigure" accessor="//@figures.0/@descriptors.20/@accessors.0"/>
+  <labels name="JoinLabel" figure="JoinFigure" accessor="//@figures.0/@descriptors.21/@accessors.0"/>
+  <labels name="OperationNextExternalLabel" figure="OperationNextExternalLabelFigure" elementIcon="false"/>
+  <labels name="ServiceTaskGeneratesExternalLabel" figure="ServiceTaskGeneratesExternalLabelFigure" elementIcon="false"/>
+  <labels name="ServiceTaskRequiresExternalLabel" figure="ServiceTaskRequiresExternalLabelFigure" elementIcon="false"/>
+  <labels name="UserTaskInputExternalLabel" figure="UserTaskInputExternalLabelFigure" elementIcon="false"/>
+  <labels name="SendMsgAttachSendExternalLabel" figure="SendMsgAttachSendExternalLabelFigure" elementIcon="false"/>
+  <labels name="SendMsgNavigatesToExternalLabel" figure="SendMsgNavigatesToExternalLabelFigure" elementIcon="false"/>
+  <labels name="ReceiveMsgAttachRecExternalLabel" figure="ReceiveMsgAttachRecExternalLabelFigure" elementIcon="false"/>
+</gmfgraph:Canvas>

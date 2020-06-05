@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkFlowMM:WorkFlow
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:WorkFlowMM="http://www.unex.dmss.es/WorkFlowMM"
+    name="Pizzeria">
+  <actors Name="Client"
+      ID="Client">
+    <operations
+        xsi:type="WorkFlowMM:Initial"
+        ID="init0"
+        next="Form1"
+        name="Init"/>
+    <operations
+        xsi:type="WorkFlowMM:UserTask"
+        ID="Form1"
+        next="Form2"
+        name="FormSelectPizza"
+        input="//@actors.0/@data.2"/>
+    <operations
+        xsi:type="WorkFlowMM:UserTask"
+        ID="Form2"
+        next="Send1"
+        name="FormShipping"
+        input="//@actors.0/@data.0"/>
+    <operations
+        xsi:type="WorkFlowMM:SendMsg"
+        ID="Send1"
+        next="RecShipp"
+        name="SendPizzaForm"
+        attachSend="//@actors.0/@data.0"
+        navigatesTo="SendSatisf"/>
+    <operations
+        xsi:type="WorkFlowMM:ReceiveMsg"
+        ID="Reecsat"
+        next="Satisf"
+        name="RecSatisfaction"
+        attachRec="//@actors.1/@data.0"/>
+    <operations
+        xsi:type="WorkFlowMM:UserTask"
+        ID="Satisf"
+        next="SendSatisf"
+        name="SatisfactionForm"
+        input="//@actors.0/@data.1"/>
+    <operations
+        xsi:type="WorkFlowMM:SendMsg"
+        ID="SendSatisf"
+        next="RecSatisf"
+        name="SendSatisfaction"
+        attachSend="//@actors.0/@data.1"/>
+    <data Name="FormPizza">
+      <data
+          xsi:type="WorkFlowMM:Text"
+          name="Name"
+          requiered="true"/>
+      <data
+          xsi:type="WorkFlowMM:Text"
+          name="Last Name"
+          requiered="true"/>
+      <data
+          xsi:type="WorkFlowMM:Text"
+          name="Street"
+          requiered="true"/>
+    </data>
+    <data Name="SatisfactionForm">
+      <data
+          xsi:type="WorkFlowMM:Text"
+          name="Delivery"
+          requiered="true"/>
+      <data
+          xsi:type="WorkFlowMM:Text"
+          name="Name"
+          requiered="true"/>
+      <data
+          xsi:type="WorkFlowMM:Text"
+          name="Opinion"
+          requiered="true"/>
+      <data
+          xsi:type="WorkFlowMM:Range"
+          name="Satisfaction"
+          requiered="true"
+          maxValue="100"/>
+    </data>
+    <data Name="ChoosePizza">
+      <data
+          xsi:type="WorkFlowMM:CheckBox"
+          name="Choose one"
+          requiered="true">
+        <options
+            fieldname="Pizza Pepperoni"/>
+        <options
+            fieldname="Pizza Hawai"/>
+        <options
+            fieldname="Pizza Margarita"/>
+      </data>
+    </data>
+  </actors>
+  <actors Name="Worker0"
+      ID="Worker0"
+      Male="false">
+    <operations
+        xsi:type="WorkFlowMM:ReceiveMsg"
+        ID="RecShipp"
+        next="MakePizza"
+        name="RecShippingPizza"
+        descript=""
+        attachRec="//@actors.0/@data.0"/>
+    <operations
+        xsi:type="WorkFlowMM:ServiceTask"
+        ID="MakePizza"
+        next="SendSt"
+        name="MakeP0"
+        generates="//@actors.1/@data.0"
+        requires="//@actors.0/@data.0"/>
+    <operations
+        xsi:type="WorkFlowMM:SendMsg"
+        ID="SendSt"
+        next="Reecsat"
+        name="Sendst1"
+        descript=""
+        attachSend="//@actors.1/@data.0"/>
+    <data Name="PizzaStatus">
+      <data
+          xsi:type="WorkFlowMM:Text"
+          name="Name"
+          requiered="true"/>
+      <data
+          xsi:type="WorkFlowMM:Text"
+          name="Last Name"
+          requiered="true"/>
+      <data
+          xsi:type="WorkFlowMM:Text"
+          name="Street"
+          requiered="true"/>
+    </data>
+  </actors>
+  <actors Name="Worker1"
+      ID="Worker1">
+    <operations
+        xsi:type="WorkFlowMM:ReceiveMsg"
+        ID="RecSatisf"
+        next="Dec0"
+        name="ReceSatisf1"
+        attachRec="//@actors.0/@data.1"/>
+    <operations
+        xsi:type="WorkFlowMM:Decision"
+        ID="Dec0"
+        next="Delete0 Check0"
+        question="What do you prefer to delete or check?"/>
+    <operations
+        xsi:type="WorkFlowMM:ServiceTask"
+        ID="Delete0"
+        next="Join0"
+        name="DeleteForm"
+        generates="//@actors.2/@data.0"
+        requires="//@actors.0/@data.1"/>
+    <operations
+        xsi:type="WorkFlowMM:ServiceTask"
+        ID="Check0"
+        next="Join0"
+        name="CheckForm"
+        generates="//@actors.2/@data.0"
+        requires="//@actors.0/@data.1"/>
+    <operations
+        xsi:type="WorkFlowMM:Join"
+        ID="Join0"
+        next="Fin0"/>
+    <operations
+        xsi:type="WorkFlowMM:Final"
+        ID="Fin0"
+        name="Fin"/>
+    <data Name="SatisfCheck">
+      <data
+          xsi:type="WorkFlowMM:Text"
+          name="CheckSatisfaction"
+          requiered="true"/>
+      <data
+          xsi:type="WorkFlowMM:Text"
+          name="Annotations"
+          requiered="true"/>
+    </data>
+  </actors>
+</WorkFlowMM:WorkFlow>
