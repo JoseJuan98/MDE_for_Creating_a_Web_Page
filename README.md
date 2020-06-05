@@ -41,3 +41,16 @@ As a individual developer I didn’t have a planning, I just carry out with the 
 6- Create the EuGenia editor
 
 And between all task, all time I have to came step behind to change something.
+
+## Diagram Example and Results
+
+### Diagram
+
+
+![Image of Model](https://github.com/JoseJuan98/MDE-for-Creating-a-Web-Page/tree/master/imgs/Diagram_Example.png)
+
+### Some pages
+
+![Image of Model](https://github.com/JoseJuan98/MDE-for-Creating-a-Web-Page/tree/master/imgs/Client.png)
+
+![Image of Model](https://github.com/JoseJuan98/MDE-for-Creating-a-Web-Page/tree/master/imgs/form.png)
