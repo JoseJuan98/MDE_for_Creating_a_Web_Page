@@ -13,28 +13,26 @@ So basically, provide a quick solution for implement basics web services.The web
 This repository contains all the projects and complementary files listed next:
 
 - All the Eclipse projects developed as part of the assignment (abstract and concrete syntax, code generators, etc.):
-	
-		- WorkFlowDSL
-		- WorkFlowDSL.edit
-		- WorkFlowDSL.editor
-		- WorkFlowDSL.test
-		- WorkFlowDSL.diagram
-		- org.eclipse.acceleo.module.generateApplication
+	- WorkFlowDSL
+	- WorkFlowDSL.edit
+	- WorkFlowDSL.editor
+	- WorkFlowDSL.test
+	- WorkFlowDSL.diagram
+	- org.eclipse.acceleo.module.generateApplication
 
 - The example models developed with the WorkflowDSL graphical/textual model editor:
-	
-		- PizzeriaSimpleExample.src.Test1.workflowmm_diagram
+	- PizzeriaSimpleExample.src.Test1.workflowmm_diagram
 		
 - The code generated from the previous example models:
-		- PizzeriaSimpleExample.Web.*
+	- PizzeriaSimpleExample.Web.*
 
 - Another example for generating code
-		- PizzeriaWith2WorkersExample
-		- Model in model. PizzeriaWith2WorkersExample
-		- Code in src.*
+	- PizzeriaWith2WorkersExample
+	- Model in model. PizzeriaWith2WorkersExample
+	- Code in src.*
 		
 - The project documentation (this document):
-		- Documentation.pdf
+	- Documentation.pdf
 
 ## Planning
 As a individual developer I didn’t have a planning, I just carry out with the task when I have time, but I did it in an order, the following one:
